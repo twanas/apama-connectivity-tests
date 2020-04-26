@@ -1,0 +1,45 @@
+package com.numeric;
+
+using com.softwareag.connectivity.ConnectivityPlugins;
+
+event Limits {
+     integer integerMax;
+     integer integerMin;
+     float floatMax;
+     float floatMin;
+     float doubleMax;
+     float doubleMin;
+}
+
+event LimitsRequest {}
+
+monitor LimitsService {
+
+    action onload() {
+
+        monitor.subscribe("numeric_limits_host");
+
+        on Limits() as limits {
+
+            boolean maxIntegerEquality := (limits.integerMax = integer.MAX);
+            boolean minIntegerEquality := (limits.integerMin = integer.MIN);
+            boolean maxFloatEquality := (limits.floatMax = float.MAX);
+            boolean minFloatEquality := (limits.floatMin = float.MIN);
+            boolean maxDoubleEquality := (limits.doubleMax = float.MAX);
+            boolean minDoubleEquality := (limits.doubleMin = float.MIN);
+
+            log "Limits received, comparing to epl native types: ";
+            log "maxInteger equality: " + maxIntegerEquality.toString();
+            log "minInteger equality: " + minIntegerEquality.toString();
+            log "maxFloatEquality equality: " + maxFloatEquality.toString();
+            log "minFloatEquality equality: " + maxFloatEquality.toString();
+            log "maxDoubleEquality equality: " + maxDoubleEquality.toString();
+            log "minDoubleEquality equality: " + maxDoubleEquality.toString();
+
+        }
+
+        ConnectivityPlugins.onApplicationInitialized();
+
+        send LimitsRequest() to "numeric_limits_transport";
+    }
+}

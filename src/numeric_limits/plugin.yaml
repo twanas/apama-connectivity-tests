@@ -1,0 +1,14 @@
+connectivityPlugins:
+  NumericLimitsAdapter:
+    directory: ${PARENT_DIR}/../../cmake-build-debug/src/numeric_limits
+    libraryName: numeric_limits
+    class: NumericLimitsPlugin
+
+startChains:
+  NumericLimitsChain:
+    - apama.eventMap:
+        subscribeChannels:
+          - numeric_limits_transport
+        defaultChannel: numeric_limits_host
+    - NumericLimitsAdapter
+
