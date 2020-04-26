@@ -10,12 +10,12 @@ public:
     /*
      * Populates an event with float, double and integer min/max
      *      event com.numeric.Limit {
-     *          integer maxInteger;
-     *          integer minInteger;
-     *          integer maxFloat;
-     *          integer minFloat;
-     *          integer maxDouble;
-     *          integer minDouble;
+     *          integer integerMax;
+     *          integer integerMin;
+     *          integer floatMax;
+     *          integer floatMin;
+     *          integer doubleMax;
+     *          integer doubleMin;
      *      }
      */
 
